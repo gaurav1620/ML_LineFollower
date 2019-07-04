@@ -1,24 +1,36 @@
+//NEURAL NETWORK WITH 8 INPUT ,8 HIDDEN AND 2 OUTPUT NODES
+//Designed by :
+/**********************************************************************
+   ______                            
+  / ____/___ ___  ___________ __   __
+ / / __/ __ `/ / / / ___/ __ `/ | / /
+/ /_/ / /_/ / /_/ / /  / /_/ /| |/ / 
+\____/\__,_/\__,_/_/   \__,_/ |___/ 
+
+    __ __ __          _                      
+   / //_// /_  ____ _(_)________  ____ ______
+  / ,<  / __ \/ __ `/ / ___/ __ \/ __ `/ ___/
+ / /| |/ / / / /_/ / / /  / / / / /_/ / /    
+/_/ |_/_/ /_/\__,_/_/_/  /_/ /_/\__,_/_/     
+
+***********************************************************************/ 
+// 4 th July 2019
 #include<iostream>
 #include<vector>
-#include <Eigen/Dense>
+#include </home/samiksha/Desktop/Codes/IntellegentLineFollower/Eigen/Dense>
 #include <math.h> 
 using namespace std;
 using namespace Eigen;
 
 
-
-
-
-//Change this
-int trainCases = 2;
+//************************************************************************
+//Change this to give more number of training cases than 2;
+int trainCases = 9;
 
 //And this too
-Matrix<Matrix<float,8,1>,2,1> matInput;
-Matrix<Matrix<float,2,1>,2,1> matExpectedOutput;
-
-
-
-
+Matrix<Matrix<float,8,1>,9,1> matInput;
+Matrix<Matrix<float,2,1>,9,1> matExpectedOutput;
+//************************************************************************
 
 
 
@@ -45,7 +57,7 @@ float sigmoid(float x){
 	return 1/denominator;
 }
 
-
+/***************************************************************************************************/
 void init(){
 
 	//TAKING INPUT VALUES
@@ -124,8 +136,9 @@ void init(){
 
 		biasB(i,0) = num/den;
 	}
-
 }
+
+/***************************************************************************************************/
 
 void feedForward(){
 
@@ -146,9 +159,11 @@ void feedForward(){
 		Bout(i,0) = sigmoid(Bin(i,0));
 	}
 
-	cout<<"\nExpected ouptputs : \n"<<expectedOutputs(0,0)<< " and "<<expectedOutputs(1,0)<<endl;
-	cout<<"\nFinal outputs : "<<Bout(0,0)<<" and "<<Bout(1,0)<<endl;
+	//cout<<"\nExpected ouptputs : \n"<<expectedOutputs(0,0)<< " and "<<expectedOutputs(1,0)<<endl;
+	//cout<<"\nFinal outputs : "<<Bout(0,0)<<" and "<<Bout(1,0)<<endl;
 }
+
+/***************************************************************************************************/
 
 void backProp(){
 	//WE JUST NEED TO ADJUST AND TUNE THE WT'S AND BIASES IN THE BACK PROP
@@ -234,10 +249,9 @@ void backProp(){
 			weightsA(i,j) -=  deltaA(i,j);
 		}
 	}
-
-
-
 }
+
+/***************************************************************************************************/
 
 void debugPrint(){
 	//	DEBUG
@@ -255,11 +269,15 @@ void debugPrint(){
 	cout<<"\n\nExpected outputs : "<<expectedOutputs<<endl;
 
 }
-void train(int epoch){
 
-	for(int j = 0;j < trainCases;j++){
+/***************************************************************************************************/
+
+void train(int epoch){
+	//*********DEBUG************ 
+	//for(int j = 0;j < trainCases;j++){
 		for(int i = 0;i < epoch;i++){
 			
+			int j = i%trainCases;
 
 			inputs = matInput(j,0);
 			expectedOutputs = matExpectedOutput(j,0);
@@ -270,31 +288,46 @@ void train(int epoch){
 			// debugPrint();
 			// cout<<"\n\n";
 		}
-	}
+	//}
 	
 }
+
+/***************************************************************************************************/
+
+void CheckTraining(){
+	cout<<"Enter the 8 inputs : \n";
+	Matrix<float,8,1> tst;
+	for(int i = 0;i < 8;i++){
+		cin>>tst(i,0);
+	}
+
+	inputs = tst;
+	feedForward();
+	cout<<Bout(0,0)<<" and "<<Bout(1,0)<<endl;
+
+}
+
+/***************************************************************************************************/
 
 int main(void){
 	//INITIALISATION
 	init();
 	feedForward();
 
-
 	//debugPrint();
-	train(1000);
+	train(100000);
 
-	inputs = matInput(0,0);
-	expectedOutputs = matExpectedOutput(0,0);
-	feedForward();
+	// inputs = matInput(0,0);
+	// expectedOutputs = matExpectedOutput(0,0);
+	// feedForward();
 
-	inputs = matInput(1,0);
-	expectedOutputs = matExpectedOutput(1,0);
-	feedForward();
-
-	
-	//debugPrint();
-
-	//debugPrint();
+	// inputs = matInput(1,0);
+	// expectedOutputs = matExpectedOutput(1,0);
+	// feedForward();
+	int i = 0;
+	while(i = 1){
+		CheckTraining();
+	}
 	//debugPrint();
 
 }
