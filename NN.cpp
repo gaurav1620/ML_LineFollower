@@ -1,6 +1,23 @@
+//NEURAL NETWORK WITH 8 INPUT ,8 HIDDEN AND 2 OUTPUT NODES
+//Designed by :
+/**********************************************************************
+   ______                            
+  / ____/___ ___  ___________ __   __
+ / / __/ __ `/ / / / ___/ __ `/ | / /
+/ /_/ / /_/ / /_/ / /  / /_/ /| |/ / 
+\____/\__,_/\__,_/_/   \__,_/ |___/ 
+
+    __ __ __          _                      
+   / //_// /_  ____ _(_)________  ____ ______
+  / ,<  / __ \/ __ `/ / ___/ __ \/ __ `/ ___/
+ / /| |/ / / / /_/ / / /  / / / / /_/ / /    
+/_/ |_/_/ /_/\__,_/_/_/  /_/ /_/\__,_/_/     
+
+***********************************************************************/ 
+// 4 th July 2019
 #include<iostream>
 #include<vector>
-#include <Eigen/Dense>
+#include </home/samiksha/Desktop/Codes/IntellegentLineFollower/Eigen/Dense>
 #include <math.h> 
 using namespace std;
 using namespace Eigen;
