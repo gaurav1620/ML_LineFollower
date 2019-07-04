@@ -1,9 +1,26 @@
 #include<iostream>
 #include<vector>
-#include <Eigen/Dense>
+#include </home/samiksha/Desktop/Codes/IntellegentLineFollower/Eigen/Dense>
 #include <math.h> 
 using namespace std;
 using namespace Eigen;
+
+
+
+
+
+//Change this
+int trainCases = 2;
+
+//And this too
+Matrix<Matrix<float,8,1>,2,1> matInput;
+Matrix<Matrix<float,2,1>,2,1> matExpectedOutput;
+
+
+
+
+
+
 
 Matrix<float,8,1> inputs;
 
@@ -33,15 +50,32 @@ void init(){
 
 	//TAKING INPUT VALUES
 
-	cout<<"\nEnter the 8 input values : \n";
-	for(int i = 0;i < 8;i++){
-		cin>>inputs(i,0);
+	cout<<"\nEnter the 8 input values for each Training  case : \n";
+
+	for(int i = 0;i < trainCases;i++){
+		Matrix<float,8,1>tmp;
+		for(int j = 0;j < 8;j++){
+			cout<<"\nEnter the value for Training Case : "<<i+1<<" and Input number : "<<j+1<<" : ";
+			float var;
+			cin>>var;
+			tmp(j,0) = var;
+		}
+		matInput(i,0) = tmp;
 	}
 
 
 	//TAKING DESIRED VALUES
-	cout<<"\nEnter the 2 Desired values : \n";
-	cin>>expectedOutputs(0,0)>>expectedOutputs(1,0);
+	cout<<"\nEnter the 2 Desired values for Each test case: \n";
+
+	for(int i = 0;i < trainCases;i++){
+		Matrix<float,2,1> tmp;
+		for(int j = 0;j < 2;j++){
+			cout<<"\nEnter the desired output for Case : "<<i+1<<" and index : "<<j+1<<" : ";
+			cin>>tmp(j,0);
+		}
+		matExpectedOutput(i,0) = tmp;
+	}
+	//cin>>expectedOutputs(0,0)>>expectedOutputs(1,0);
 
 
 	//GET THE LEARNING RATE
@@ -112,6 +146,7 @@ void feedForward(){
 		Bout(i,0) = sigmoid(Bin(i,0));
 	}
 
+	cout<<"\nExpected ouptputs : \n"<<expectedOutputs(0,0)<< " and "<<expectedOutputs(1,0)<<endl;
 	cout<<"\nFinal outputs : "<<Bout(0,0)<<" and "<<Bout(1,0)<<endl;
 }
 
@@ -221,10 +256,22 @@ void debugPrint(){
 
 }
 void train(int epoch){
-	for(int i = 0;i < epoch;i++){
-		backProp();
-		feedForward();
+
+	for(int j = 0;j < trainCases;j++){
+		for(int i = 0;i < epoch;i++){
+			
+
+			inputs = matInput(j,0);
+			expectedOutputs = matExpectedOutput(j,0);
+			feedForward();
+			backProp();
+			feedForward();
+			// cout<<"\n\n";
+			// debugPrint();
+			// cout<<"\n\n";
+		}
 	}
+	
 }
 
 int main(void){
@@ -234,7 +281,17 @@ int main(void){
 
 
 	//debugPrint();
-	train(100000);
+	train(1000);
+
+	inputs = matInput(0,0);
+	expectedOutputs = matExpectedOutput(0,0);
+	feedForward();
+
+	inputs = matInput(1,0);
+	expectedOutputs = matExpectedOutput(1,0);
+	feedForward();
+
+	
 	//debugPrint();
 
 	//debugPrint();
