@@ -140,7 +140,7 @@ void backProp(){
 			float delta = 0;
 			//CHECK THIS CHECK THIS CHECK THIS CHECK THIS CHECK THIS
 			float a = 2*(Bout(i,0) - expectedOutputs(i,0));  // dC / dBout
-			float b = Bin(i,0)*(1-Bin(i,0));                 // dBout / dBin
+			float b = Bout(i,0)*(1-Bout(i,0));                 // dBout / dBin
 			float c = Aout(j,0);	      					 // dBin / dW(i)
 
 			delta = a*b*c;
