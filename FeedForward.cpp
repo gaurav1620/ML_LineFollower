@@ -1,3 +1,29 @@
+/**********************************************************************
+ * NEURAL NETWORK WITH 8 INPUT ,8 HIDDEN AND 2 OUTPUT NODES
+ * Made for  LINE FOLLOWER robots.
+ * Designed by :
+
+   ______                            
+  / ____/___ ___  ___________ __   __
+ / / __/ __ `/ / / / ___/ __ `/ | / /
+/ /_/ / /_/ / /_/ / /  / /_/ /| |/ / 
+\____/\__,_/\__,_/_/   \__,_/ |___/ 
+
+    __ __ __          _                      
+   / //_// /_  ____ _(_)________  ____ ______
+  / ,<  / __ \/ __ `/ / ___/ __ \/ __ `/ ___/
+ / /| |/ / / / /_/ / / /  / / / / /_/ / /    
+/_/ |_/_/ /_/\__,_/_/_/  /_/ /_/\__,_/_/     
+
+****************************************************************
+// 4 th July 2019
+
+@ Website : gaurav1620.rf.gd
+@ Github  : gaurav1620
+@ Insta   : may_be_gaurav 
+@ Gmail   : gauravak007@gmail.com
+
+*/
 #include<iostream>
 #include<vector>
 #include <Eigen/Dense>
@@ -8,11 +34,22 @@ using namespace Eigen;
 
 float sigmoid(float x){
 	float denominator = (1 + exp(-x));
-	return 1/denominator;
+	float f =  1/denominator;
+	if(f > 0.5){
+		return 1;
+	}
+	return 0;
+}
 
+float sigmoidVal(float x){
+	float denominator = (1 + exp(-x));
+	float f =  1/denominator;
+	return f;
 }
 
 int main(void){
+
+	Matrix<float,2,1> expectedOutput;
 
 	//Layer One.
 
@@ -51,6 +88,11 @@ int main(void){
 
 	}
 
+	cout<<"Enter the expected output values (2): \n";
+	for(int i = 0; i < 2;i++){
+		cin>>expectedOutput(i,0);
+	}
+
 	cout<<"The Weights are : \n";
 	cout<<weights_1<<endl<<endl<<endl;
 
@@ -81,14 +123,10 @@ int main(void){
 
 	//Sigmoid gives a value between 0 and 1 so if the val is >0.5 we take the output of the neuron as 1 else 0
 	for(int i = 0;i < 8;i++){
-		if(sigmoid(output_1(i,0))>0.5){
-			sigOut(i,0) = 1;
-		}else{
-			sigOut(i,0) = 0;
-		}
+		sigOut(i,0) = sigmoidVal(output_1(i,0));
 
 	}
-	cout<<"Sigmoid : \n"<<sigOut<<endl;
+	cout<<"SigmoidVal: \n"<<sigOut<<endl;
 
 
 
@@ -123,17 +161,32 @@ int main(void){
 
 	cout<<"\nweighted sum after adding biases : \n"<<tmp<<endl;
 
+	// sigmoid values;
+	Matrix<float,2,1> sigVal;
+
 	//Passing weighted sum through the sigmoid
 	for(int i = 0; i < 2;i++){
-		if(sigmoid(tmp(i,0)) > 0.5){
-			output_2(i,0) = 1;
-		}else{
-			output_2(i,0) = 0;
-		}
+		output_2(i,0) = sigmoid(tmp(i,0));
+		sigVal(i,0) = sigmoidVal(tmp(i,0));
 	}
+
+
+	cout<<"\nOutput Confidence : \n"<<sigVal<<endl<<endl;
 
 	cout<<"\nFinal outputs : \n"<<output_2<<endl;
 
+	float cost = 0;
+
+	for(int i = 0; i < 2;i++){
+		cost += (expectedOutput(i,0)-sigVal(i,0))*(expectedOutput(i,0)-sigVal(i,0));
+
+	}
+
+	cout<<"\nCost = "<<cost<<endl;
+
+	float avgCost = cost/2;
+
+	cout<<"\nAverage Cost  =  "<<avgCost<<endl;
 
 }
 

@@ -1,6 +1,8 @@
-//NEURAL NETWORK WITH 8 INPUT ,8 HIDDEN AND 2 OUTPUT NODES
-//Designed by :
 /**********************************************************************
+ * NEURAL NETWORK WITH 8 INPUT ,8 HIDDEN AND 2 OUTPUT NODES
+ * Made for  LINE FOLLOWER robots.
+ * Designed by :
+
    ______                            
   / ____/___ ___  ___________ __   __
  / / __/ __ `/ / / / ___/ __ `/ | / /
@@ -13,11 +15,18 @@
  / /| |/ / / / /_/ / / /  / / / / /_/ / /    
 /_/ |_/_/ /_/\__,_/_/_/  /_/ /_/\__,_/_/     
 
-***********************************************************************/ 
+****************************************************************
 // 4 th July 2019
+
+@ Website : gaurav1620.rf.gd
+@ Github  : gaurav1620
+@ Insta   : may_be_gaurav 
+@ Gmail   : gauravak007@gmail.com
+
+*/
 #include<iostream>
 #include<vector>
-#include </home/samiksha/Desktop/Codes/IntellegentLineFollower/Eigen/Dense>
+#include <Eigen/Dense>
 #include <math.h> 
 using namespace std;
 using namespace Eigen;

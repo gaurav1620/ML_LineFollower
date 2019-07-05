@@ -1,6 +1,8 @@
-//NEURAL NETWORK WITH 8 INPUT ,8 HIDDEN AND 2 OUTPUT NODES
-//Designed by :
 /**********************************************************************
+ * NEURAL NETWORK WITH 8 INPUT ,8 HIDDEN AND 2 OUTPUT NODES
+ * Made for  LINE FOLLOWER robots.
+ * Designed by :
+
    ______                            
   / ____/___ ___  ___________ __   __
  / / __/ __ `/ / / / ___/ __ `/ | / /
@@ -13,8 +15,15 @@
  / /| |/ / / / /_/ / / /  / / / / /_/ / /    
 /_/ |_/_/ /_/\__,_/_/_/  /_/ /_/\__,_/_/     
 
-***********************************************************************/ 
+****************************************************************
 // 4 th July 2019
+
+@ Website : gaurav1620.rf.gd
+@ Github  : gaurav1620
+@ Insta   : may_be_gaurav 
+@ Gmail   : gauravak007@gmail.com
+
+*/
 #include<iostream>
 #include<vector>
 #include <Eigen/Dense>
@@ -25,11 +34,11 @@ using namespace Eigen;
 
 //************************************************************************
 //Change this to give more number of training cases than 2;
-int trainCases = 9;
+int trainCases = 11;
 
 //And this too
-Matrix<Matrix<float,8,1>,9,1> matInput;
-Matrix<Matrix<float,2,1>,9,1> matExpectedOutput;
+Matrix<Matrix<float,8,1>,11,1> matInput;
+Matrix<Matrix<float,2,1>,11,1> matExpectedOutput;
 //************************************************************************
 
 
@@ -73,21 +82,32 @@ void init(){
 			tmp(j,0) = var;
 		}
 		matInput(i,0) = tmp;
-	}
 
-
-	//TAKING DESIRED VALUES
-	cout<<"\nEnter the 2 Desired values for Each test case: \n";
-
-	for(int i = 0;i < trainCases;i++){
-		Matrix<float,2,1> tmp;
+		//***************
+		Matrix<float,2,1> tmp2;
 		for(int j = 0;j < 2;j++){
 			cout<<"\nEnter the desired output for Case : "<<i+1<<" and index : "<<j+1<<" : ";
-			cin>>tmp(j,0);
+			cin>>tmp2(j,0);
 		}
-		matExpectedOutput(i,0) = tmp;
+		matExpectedOutput(i,0) = tmp2;
+		//**********************
 	}
-	//cin>>expectedOutputs(0,0)>>expectedOutputs(1,0);
+
+	//****************
+	// //TAKING DESIRED VALUES
+	// cout<<"\nEnter the 2 Desired values for Each test case: \n";
+
+	// for(int i = 0;i < trainCases;i++){
+	// 	Matrix<float,2,1> tmp;
+	// 	for(int j = 0;j < 2;j++){
+	// 		cout<<"\nEnter the desired output for Case : "<<i+1<<" and index : "<<j+1<<" : ";
+	// 		cin>>tmp(j,0);
+	// 	}
+	// 	matExpectedOutput(i,0) = tmp;
+	// }
+	// //cin>>expectedOutputs(0,0)>>expectedOutputs(1,0);
+
+	//******************
 
 
 	//GET THE LEARNING RATE
@@ -327,8 +347,9 @@ int main(void){
 	int i = 0;
 	while(i = 1){
 		CheckTraining();
+		debugPrint();
 	}
-	//debugPrint();
+	
 
 }
 
