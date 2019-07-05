@@ -226,15 +226,15 @@ void act(){
 	float lPwm = leftPrediction  * 255;
 	float rPwm = rightPrediction * 255;
 
-	analogWrite(22,pwm2);
-  digitalWrite(24,LOW);
-  analogWrite(26,pwm1);
-  digitalWrite(28,LOW);
+	analogWrite(22,lPwm);
+  	digitalWrite(24,LOW);
+  	analogWrite(26,rPwm);
+  	digitalWrite(28,LOW);
 
 	// //DEBUG
 	// Serial.print(pwm2);
-  // Serial.print(",");
-  // Serial.println(pwm1);
+  	// Serial.print(",");
+  	// Serial.println(pwm1);
 }
 double Sigmoid(double x){
     return 1 / (1 + exp(-x));
